@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 0;
+    margin: 0;
+    background-image: url('../assets/sample.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+header img {
+    transform: scale(0.5);
+}
+
+header h1 {
+    text-align: center;
+    color: white;
+}
+
+.topnav {
+    overflow: hidden;
+}
+
+.topnav a {
+    float: right;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 24px;
+    margin-top: 20px;
+    margin-right: 60px;
+}
+
+.topnav a:hover {
+    background-color: lightskyblue;
+}
+
+div.column {
+    width: 50%;
+    padding: 10px;
+    margin: 30px;
+    
+    /* align center child */
+    display: flex;
+    justify-content: center;
+
+    /* debug */
+    /* border: 1px solid; */
+}
+
+.container {
+    position: relative;    
+    width: 70%;
+    height: 600px;
+    padding: 10px;
+    border: 1px dotted lightgrey;
+
+    /* debug */
+    /* border: 1px dotted; */
+}
+
+.container:hover {
+    border: 3px solid lightskyblue;
+}
+
+.container img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    padding: 3px;
+}
+
+
+.container p.title {
+    text-align: left;
+    font-size: 24px;
+}
+
+.container p.date {
+    color: lightgrey;
+    text-align: left;
+    font-size: 24px;
+}
+
+.taggedimg {
+    height: 250px;
+    background-image: url('../assets/sample.jpg');
+    position: relative;
+
+    /* debug */
+    /* border: solid 1px; */
+}
+
+.taggedimg .tag {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    font-size: 18px;
+    background-color: darkblue;
+    color: white;
+    padding: 0px 10px;
+}
+
+.taggedimg .tag {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    font-size: 18px;
+    background-color: darkblue;
+    color: white;
+    padding: 0px 10px;
+}
+  
+div.row {
+    display: flex;
+}
+
+footer {
+    text-align: center;
+    background-color: lightgrey;
+}
+
+footer a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+}
