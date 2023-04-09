@@ -1,30 +1,44 @@
+/* Body */
 body {
     margin: 0;
     padding: 0;
 }
 
+/* Main */
+main {
+    position: fixed;
+    top: 0;
+    left: 160px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+/* Header */
 header {
     padding: 0;
     margin: 0;
+    left: 160px;
     background-image: url('../assets/sample.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
 }
 
-header img {
+header > img {
     transform: scale(0.5);
 }
 
-header h1 {
+header > h1 {
     text-align: center;
     color: white;
 }
 
+/* Top navigation */
 .topnav {
     overflow: hidden;
 }
 
-.topnav a {
+.topnav > a {
     float: right;
     color: white;
     text-align: center;
@@ -35,10 +49,42 @@ header h1 {
     margin-right: 60px;
 }
 
-.topnav a:hover {
+.topnav > a:hover {
     background-color: lightskyblue;
 }
 
+/* Side navigation */
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+
+.sidenav > a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: lightgrey;
+    display: block;
+}
+
+.sidenav > a:hover {
+    color: black;
+    background-color: lightgrey;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav > a {font-size: 18px;}
+}
+
+/* Page contents */
 div.column {
     width: 50%;
     padding: 10px;
@@ -50,6 +96,15 @@ div.column {
 
     /* debug */
     /* border: 1px solid; */
+}
+
+.container > a > .link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .container {
@@ -67,7 +122,7 @@ div.column {
     border: 3px solid lightskyblue;
 }
 
-.container img {
+.container > img {
     display: block;
     max-width: 100%;
     max-height: 100%;
@@ -76,12 +131,12 @@ div.column {
 }
 
 
-.container p.title {
+.container > p.title {
     text-align: left;
     font-size: 24px;
 }
 
-.container p.date {
+.container > p.date {
     color: lightgrey;
     text-align: left;
     font-size: 24px;
@@ -90,13 +145,14 @@ div.column {
 .taggedimg {
     height: 250px;
     background-image: url('../assets/sample.jpg');
+    background-size: cover;
     position: relative;
 
     /* debug */
     /* border: solid 1px; */
 }
 
-.taggedimg .tag {
+.taggedimg > .tag {
     position: absolute;
     bottom: 10px;
     left: 0;
@@ -106,12 +162,22 @@ div.column {
     padding: 0px 10px;
 }
 
-.taggedimg .tag {
+.taggedimg > .diarytag {
     position: absolute;
     bottom: 10px;
     left: 0;
     font-size: 18px;
-    background-color: darkblue;
+    background-color: green;
+    color: white;
+    padding: 0px 10px;
+}
+
+.taggedimg > .newstag {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    font-size: 18px;
+    background-color: orange;
     color: white;
     padding: 0px 10px;
 }
@@ -120,12 +186,13 @@ div.row {
     display: flex;
 }
 
+/* Footer */
 footer {
     text-align: center;
     background-color: lightgrey;
 }
 
-footer a {
+footer > a {
     color: black;
     padding: 14px 16px;
     text-decoration: none;
