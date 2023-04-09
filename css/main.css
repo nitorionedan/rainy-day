@@ -89,6 +89,7 @@ div.column {
     width: 50%;
     padding: 10px;
     margin: 30px;
+    background-color: white;
     
     /* align center child */
     display: flex;
@@ -110,16 +111,22 @@ div.column {
 .container {
     position: relative;    
     width: 70%;
-    height: 600px;
+    height: 500px;
     padding: 10px;
     border: 1px dotted lightgrey;
+    transition: 0.3s;
 
     /* debug */
     /* border: 1px dotted; */
+    /* animation-name: fadein;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards; */
 }
 
 .container:hover {
-    border: 3px solid lightskyblue;
+    /* border: 1px solid lightskyblue; */
+    box-shadow: 1px 1px 10px grey;
 }
 
 .container > img {
