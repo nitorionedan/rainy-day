@@ -17,15 +17,18 @@ main {
 /* Header */
 header {
     padding: 0;
+    position: relative;
     margin: 0;
-    left: 160px;
     background-image: url('../assets/sample.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
 }
 
 header > img {
-    transform: scale(0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
 }
 
 header > h1 {
@@ -44,9 +47,10 @@ header > h1 {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 18px;
     margin-top: 20px;
-    margin-right: 60px;
+    margin-right: 0;
+    transition: 0.3s;
 }
 
 .topnav > a:hover {
@@ -62,7 +66,7 @@ header > h1 {
     top: 0;
     left: 0;
     background-color: black;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-x: hidden;
     padding-top: 20px;
 }
 
@@ -80,8 +84,13 @@ header > h1 {
 }
 
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav > a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+        width: 80px;
+    }
+    .sidenav > a {
+        font-size: 9px;
+    }
 }
 
 /* Page contents */
@@ -94,9 +103,6 @@ div.column {
     /* align center child */
     display: flex;
     justify-content: center;
-
-    /* debug */
-    /* border: 1px solid; */
 }
 
 .container > a > .link {
@@ -115,17 +121,9 @@ div.column {
     padding: 10px;
     border: 1px dotted lightgrey;
     transition: 0.3s;
-
-    /* debug */
-    /* border: 1px dotted; */
-    /* animation-name: fadein;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards; */
 }
 
 .container:hover {
-    /* border: 1px solid lightskyblue; */
     box-shadow: 1px 1px 10px grey;
 }
 
@@ -154,9 +152,6 @@ div.column {
     background-image: url('../assets/sample.jpg');
     background-size: cover;
     position: relative;
-
-    /* debug */
-    /* border: solid 1px; */
 }
 
 .taggedimg > .tag {
@@ -197,6 +192,7 @@ div.row {
 footer {
     text-align: center;
     background-color: lightgrey;
+    bottom: 0;
 }
 
 footer > a {
