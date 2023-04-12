@@ -1,35 +1,61 @@
-function leafletOnMoblie() {
+function quickStart() {
+    // Leafletマップオブジェクトを作成
+    var sendaiPoint = [38.26764, 140.87366];
+    let map = L.map("map").setView(sendaiPoint, 14);
 
-}
-
-function pinTokyo() {
-    const point = [35.6895, 139.6917];
-    const map = L.map("map").setView(point, 13);
-    
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // タイルレイヤーを設定
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-    
-    const marker = L.marker(point).addTo(map);
-    marker.bindPopup("<b>東京都</b><br>日本").openPopup();
+
+    // ピンを地図に追加
+    let marker = L.marker(sendaiPoint).addTo(map);
+    marker.bindPopup("ok").openPopup();
+
+    // 円を地図に追加
+    let circle = L.circle(sendaiPoint, {
+        color: "red",
+        fillColor: "#f03",
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(map);
+
+    // ポリゴンを地図に追加
+    let polygon = L.polygon([
+        [51.509, -0.08],
+        [51.503, -0.06],
+        [51.51, -0.047]
+    ]).addTo(map);
+
+    let popup = L.popup();
+    map.on("click", (e) => {
+        console.log("at " + e.latlng);
+        popup.setLatLng(e.latlng)
+            .setContent(e.latlng.lat.toString())
+            .openOn(map);
+    });
 }
 
-function onLocationFound(e) {
-    var radiius = e.accuracy;
+function initShareButton() {
+    const shareData = {
+        title: "Current Address",
+        text: "LatLng(xxx, yyy)",
+        url: "https://developer.mozilla.org",
+    };
 
-    L.marker(e.latlng).addTo(map)
-        .bindPopup("You are witihin" + radiius + "meters from this point").openPopup();
+    const btn = document.getElementById("shareButton");
+    const resultPara = document.getElementById("shareResult");
 
-    L.circle(e.latlng, radiius).addTo(map);
+    btn.addEventListener("click", async () => {
+        try {
+            await navigator.share(shareData);
+            resultPara.textContent = "Shared successfully";
+        } catch (err) {
+            resultPara.textContent = `Error: ${err}`;
+        }
+    });
 }
 
-leafletOnMoblie();
-const map = L.map("map").fitWorld();
-const tileLayperOpt = {
-    maxZoom: 19,
-    attribution: "© OpenStreetMap",
-};
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-            tileLayperOpt).addTo(map);
-map.locate({setView: true, maxZoom: 16});
-map.on("locationfound", onLocationFound);
+quickStart();
+initShareButton();
