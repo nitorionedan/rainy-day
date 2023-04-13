@@ -1,35 +1,45 @@
+// 現在時刻取得用
 const today = new Date();
+
+// とりあえずの地図の拡大レベル
 const defaultZoomLvl = 16;
 
+// leaflet地図オブジェクト
 let map = undefined;
+
+// 現在位置（経度緯度）
 let currentLatLng = {
     lat: 0,
     lng: 0
 };
-let opponentLatLng = undefined;
+
+// URLパラメータの位置情報
+let paramLatLng = undefined;
+
+// 地図マーカーオブジェクト
 let marker = undefined;
 
-const hours = () => {
-    // 表示する桁数を2桁へ調整
-    return ("00" + today.getHours()).slice(-2);
-}
+// 表示する桁数を2桁へ調整
+const hours = () => ("00" + today.getHours()).slice(-2);
 
-const minutes = () => {
-    // 表示する桁数を2桁へ調整
-    return ("00" + today.getMinutes()).slice(-2);    
-}
+// 表示する桁数を2桁へ調整
+const minutes = () => ("00" + today.getMinutes()).slice(-2);    
 
+// マーカーのメッセージ
+const popupMsg = () => `現在地<br>${hours()}:${minutes()}`;
+
+// メイン処理
 window.onload = () => {
     // URL経度緯度パラメータを解析
-    const url = location.href;
-    paramLatLng = url.substring(url.indexOf("#") + 1, url.length);
-    const lat = parseFloat(paramLatLng.split("/")[0]);
-    const lng = parseFloat(paramLatLng.split("/")[1]);
+    let url = location.href;
+    let paramLatLng = url.substring(url.indexOf("#") + 1, url.length);
+    let lat = parseFloat(paramLatLng.split("/")[0]);
+    let lng = parseFloat(paramLatLng.split("/")[1]);
     if (!isNaN(lat) && !isNaN(lng)) {
-        opponentLatLng = [lat, lng];
+        paramLatLng = [lat, lng];
     }
     else {
-        opponentLatLng = undefined;
+        paramLatLng = undefined;
     }
 
     // Leafletマップオブジェクトを作成
@@ -57,7 +67,7 @@ window.onload = () => {
         currentLatLng = {lat: e.latlng.lat, lng: e.latlng.lng};
 
         // ピンに現在時刻を表示
-        marker.bindPopup(`現在地<br>${hours()}:${minutes()}`).openPopup();
+        marker.bindPopup(popupMsg()).openPopup();
     });
 
     if (!navigator.geolocation) {
@@ -69,6 +79,7 @@ window.onload = () => {
     }
 };
 
+// お試し用
 function quickStart(map) {
     // 現在地にピン
     map.once("locationfound", (e) => {
@@ -87,11 +98,12 @@ function quickStart(map) {
     });
 
     // debug
-    if (opponentLatLng != undefined) {
-        L.marker(opponentLatLng).bindPopup("相手の現在地").addTo(map);
+    if (paramLatLng != undefined) {
+        L.marker(paramLatLng).bindPopup("相手の現在地").addTo(map);
     }
 }
 
+// シェアボタンの設定
 function initShareButton() {
     const btn = document.getElementById("share-button");
     btn.addEventListener("click", async () => {
@@ -110,6 +122,7 @@ function initShareButton() {
     });
 }
 
+// 位置を取得
 function getPosition(position) {
     if (marker){
         map.removeLayer(marker);
@@ -118,5 +131,7 @@ function getPosition(position) {
     marker = L.marker([
         position.coords.latitude, 
         position.coords.longitude
-    ]).addTo(map);
+    ])
+    .bindPopup(popupMsg())
+    .addTo(map);
 }
