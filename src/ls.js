@@ -23,7 +23,13 @@ window.onload = () => {
     let lat = parseFloat(paramLatLng.split("/")[0]);
     let lng = parseFloat(paramLatLng.split("/")[1]);
     console.log(`${lat.toString()}, ${lng.toString()}`);
-    opponentLatLng = [lat, lng];
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+        opponentLatLng = [lat, lng];
+    }
+    else {
+        opponentLatLng = undefined;
+    }
 
     quickStart();
     initShareButton();
