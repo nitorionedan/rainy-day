@@ -1,6 +1,3 @@
-// 現在時刻取得用
-const today = new Date();
-
 // とりあえずの地図の拡大レベル
 const defaultZoomLvl = 16;
 
@@ -20,13 +17,21 @@ let paramLatLng = undefined;
 let marker = undefined;
 
 // 表示する桁数を2桁へ調整
-const hours = () => ("00" + today.getHours()).slice(-2);
+const hours = () => ("00" + (new Date()).getHours()).slice(-2);
 
 // 表示する桁数を2桁へ調整
-const minutes = () => ("00" + today.getMinutes()).slice(-2);    
+const minutes = () => ("00" + (new Date()).getMinutes()).slice(-2);    
 
 // マーカーのメッセージ
-const popupMsg = () => `現在地<br>${hours()}:${minutes()}`;
+const popupMsg = () => {
+    const today = new Date();
+    const hours = ("00" + today.getHours()).slice(-2);
+    const minutes = ("00" + (new Date()).getMinutes()).slice(-2);
+    return `現在地<br>${hours}:${minutes}`
+};
+
+// モバイルユーザーかどうか
+const isMobileUser = () => navigator.userAgent.match(/iPhone|Android.+Mobile/);
 
 // メイン処理
 window.onload = () => {
@@ -73,9 +78,11 @@ window.onload = () => {
     if (!navigator.geolocation) {
         console.log("Error: Geolocation機能がありません。");
     } else {
-        setInterval(() => {
-            navigator.geolocation.getCurrentPosition(getPosition);
-        }, 5000);
+        if (isMobileUser()) {
+            setInterval(() => {
+                navigator.geolocation.getCurrentPosition(getPosition);
+            }, 5000);
+        }
     }
 };
 
@@ -135,3 +142,4 @@ function getPosition(position) {
     .bindPopup(popupMsg())
     .addTo(map);
 }
+
