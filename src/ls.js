@@ -16,12 +16,6 @@ let paramLatLng = undefined;
 // 地図マーカーオブジェクト
 let marker = undefined;
 
-// 表示する桁数を2桁へ調整
-const hours = () => ("00" + (new Date()).getHours()).slice(-2);
-
-// 表示する桁数を2桁へ調整
-const minutes = () => ("00" + (new Date()).getMinutes()).slice(-2);    
-
 // マーカーのメッセージ
 const popupMsg = () => {
     const today = new Date();

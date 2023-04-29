@@ -1,3 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+[class*="col-"] {
+    float: left;
+}
+
 /* Body */
 body {
     margin: 0;
@@ -5,23 +19,39 @@ body {
 }
 
 /* Main */
-main {
+/* main {
     position: fixed;
     top: 0;
     left: 160px;
     right: 0;
     bottom: 0;
     overflow: auto;
+} */
+
+:root {
+    /* main */
+    --color-primary: #56B7E1;
+    --color-seconday: #0883B8;
+
+    /* typography */
+    --color-text-black: black;
+    --color-text-white: #f3f3f3;
+    --color-text-grey: lightgrey;
+
+    /* content */
+    --color-content-back: white;
+
+    /* footer */
+    --color-footer-back: lightgrey;
 }
 
 /* Header */
 header {
     padding: 0;
-    position: relative;
     margin: 0;
-    background-image: url('../assets/sample.jpg');
-    background-repeat: no-repeat;
-    background-size: 100%;
+    position: relative;
+    background-color: var(--color-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 header > img {
@@ -33,7 +63,7 @@ header > img {
 
 header > h1 {
     text-align: center;
-    color: white;
+    color: var(--color-text-white);
 }
 
 /* Top navigation */
@@ -43,22 +73,21 @@ header > h1 {
 
 .topnav > a {
     float: right;
-    color: white;
+    color: var(--color-text-white);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 18px;
-    margin-top: 20px;
-    margin-right: 0;
+    margin: 0;
     transition: 0.3s;
 }
 
 .topnav > a:hover {
-    background-color: lightskyblue;
+    background-color: var(--color-seconday);
 }
 
 /* Side navigation */
-.sidenav {
+/* .sidenav {
     height: 100%;
     width: 160px;
     position: fixed;
@@ -68,22 +97,22 @@ header > h1 {
     background-color: black;
     overflow-x: hidden;
     padding-top: 20px;
-}
+} */
 
-.sidenav > a {
+/* .sidenav > a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 18px;
     color: lightgrey;
     display: block;
-}
+} */
 
-.sidenav > a:hover {
+/* .sidenav > a:hover {
     color: black;
     background-color: lightgrey;
-}
+} */
 
-@media screen and (max-height: 450px) {
+/* @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
         width: 80px;
@@ -91,17 +120,13 @@ header > h1 {
     .sidenav > a {
         font-size: 9px;
     }
-}
+} */
 
 /* Page contents */
 div.column {
-    width: 50%;
-    padding: 10px;
-    margin: 30px;
-    background-color: white;
-    
-    /* align center child */
-    display: flex;
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-content-back);    
     justify-content: center;
 }
 
@@ -119,6 +144,7 @@ div.column {
     width: 70%;
     height: 500px;
     padding: 10px;
+    margin: 0 auto;
     border: 1px dotted lightgrey;
     transition: 0.3s;
 }
@@ -135,14 +161,13 @@ div.column {
     padding: 3px;
 }
 
-
 .container > p.title {
     text-align: left;
     font-size: 24px;
 }
 
 .container > p.date {
-    color: lightgrey;
+    color: var(--color-text-grey);
     text-align: left;
     font-size: 24px;
 }
@@ -160,7 +185,7 @@ div.column {
     left: 0;
     font-size: 18px;
     background-color: darkblue;
-    color: white;
+    color: var(--color-text-white);
     padding: 0px 10px;
 }
 
@@ -170,7 +195,7 @@ div.column {
     left: 0;
     font-size: 18px;
     background-color: green;
-    color: white;
+    color: var(--color-text-white);
     padding: 0px 10px;
 }
 
@@ -180,7 +205,7 @@ div.column {
     left: 0;
     font-size: 18px;
     background-color: orange;
-    color: white;
+    color: var(--color-text-white);
     padding: 0px 10px;
 }
   
@@ -191,13 +216,30 @@ div.row {
 /* Footer */
 footer {
     text-align: center;
-    background-color: lightgrey;
+    background-color: var(--color-footer-back);
     bottom: 0;
 }
 
 footer > a {
-    color: black;
+    color: var(--color-text-black);
     padding: 14px 16px;
     text-decoration: none;
     font-size: 18px;
 }
+
+/* For desktop: */
+.col-10 {width: 10%;}
+.col-8 {width: 12.5%;}
+.col-5 {width: 20%;}
+.col-4 {width: 25%;}
+.col-3 {width: 33.3%;}
+.col-2 {width: 50%;}
+.col-1 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+      width: 100%;
+    }
+  }
+  
